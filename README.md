@@ -1,156 +1,90 @@
-# Système de Monitoring Réseau Distribué
+# Distributed Network Monitoring System
 
 ## Description
 
-Ce projet implémente un système de monitoring réseau distribué développé en Python.
-Plusieurs agents clients collectent des informations système (CPU, mémoire, disque, uptime) et les envoient à un serveur central.
+Ce projet implémente un système de **monitoring distribué** permettant de collecter des métriques système (CPU, mémoire, disque, uptime) depuis plusieurs machines clientes.
 
-Le serveur reçoit ces données, les enregistre dans une base de données SQLite et vérifie si certaines valeurs dépassent des seuils afin de générer des alertes.
-
-Ce projet illustre les concepts suivants :
-
-* systèmes distribués
-* programmation réseau avec sockets
-* multithreading
-* stockage de données avec SQLite
-* architecture client-serveur
-
----
-
-## Architecture du projet
-
-Le système est composé de trois parties principales :
-
-1. **Agents clients**
-
-* collectent les métriques système
-* envoient les données au serveur
-
-2. **Serveur de monitoring**
-
-* reçoit les données des clients
-* traite les métriques
-* génère des alertes
-
-3. **Base de données**
-
-* stocke l’historique des métriques
-* stocke les alertes
-
-Architecture simplifiée :
-
-Clients → Serveur de monitoring → Base de données
-
----
-
-## Structure du projet
-
-distributed-network-monitoring
-
-client
-
-* agent_client.py
-
-server
-
-* server.py
-* client_handler.py
-* alert_manager.py
-* node_monitor.py
-
-database
-
-* database.py
-
-config
-
-* init_db.py
-
-README.md
-
----
+Les données sont envoyées à un serveur central qui les stocke dans une base de données SQLite et peut générer des alertes en cas de dépassement de seuils.
 
 ## Technologies utilisées
 
 * Python
+* Socket Programming
 * SQLite
-* Programmation Socket
-* Multithreading
+* GitHub pour la gestion du code
 
----
+## Architecture du système
 
-## Fonctionnalités
+Le système est composé de quatre composants principaux :
 
-* collecte des métriques système
-* communication client-serveur
-* stockage des données dans une base SQL
-* génération d’alertes si les seuils sont dépassés
-* simulation de plusieurs machines
+1. **Client (Agent Monitoring)**
+   Simule des machines qui envoient leurs métriques système.
 
----
+2. **Serveur de monitoring**
+   Reçoit les données des clients et les traite.
+
+3. **Base de données SQLite**
+   Stocke les métriques reçues.
+
+4. **Gestionnaire d’alertes**
+   Détecte les anomalies comme une forte utilisation CPU.
+
+## Structure du projet
+
+distributed-network-monitoring/
+
+client/ → agents clients
+
+server/ → serveur de monitoring
+
+database/ → gestion base de données
+
+config/ → configuration et création DB
+
+README.md → documentation
 
 ## Installation
 
-1. Cloner le projet depuis GitHub :
+Cloner le dépôt GitHub :
 
-git clone https://github.com/ton-repository/distributed-network-monitoring.git
+git clone https://github.com/aitalatygueye/distributed-network-monitoring.git
 
-2. Ouvrir le projet dans PyCharm.
+Entrer dans le projet :
 
-3. Vérifier que Python est installé sur votre machine.
+cd distributed-network-monitoring
 
----
-
-## Exécution du projet
-
-### 1 Initialiser la base de données
+## Création de la base de données
 
 python config/init_db.py
 
-Cela va créer la base :
+## Lancer le serveur
 
-monitoring.db
+python -m server.server
 
----
-
-### 2 Lancer le serveur
-
-python server/server.py
-
-Le serveur démarre et attend les connexions des clients.
-
----
-
-### 3 Lancer un agent client
+## Lancer un client
 
 python client/agent_client.py
 
-Le client envoie périodiquement les métriques au serveur.
+## Simulation de plusieurs machines
 
----
+for i in {1..20}; do python client/agent_client.py & done
 
-### 4 Simuler plusieurs clients
-
-Pour simuler plusieurs machines :
-
-for i in {1..20}
-do
-python client/agent_client.py &
-done
-
----
-
-## Exemple de métriques envoyées
+## Exemple de données envoyées
 
 {
 "node": "node1",
-"cpu": 45,
-"memory": 60,
-"disk": 70,
-"uptime": 12000
+"cpu": 54,
+"memory": 6,
+"disk": 88,
+"uptime": 9689
 }
 
----
+## Améliorations possibles
+
+* Dashboard Web avec Flask
+* Visualisation graphique des métriques
+* Monitoring temps réel
+* Déploiement sur plusieurs machines
 
 ## Auteur
 

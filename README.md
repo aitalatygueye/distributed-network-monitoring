@@ -1,4 +1,4 @@
-# Distributed Network Monitoring System
+# Système distribué de supervision des noeuds d’un réseau
 
 ## Description
 
@@ -17,10 +17,10 @@ Les données sont envoyées à un serveur central qui les stocke dans une base d
 
 Le système est composé de quatre composants principaux :
 
-1. **Client (Agent Monitoring)**
+1. **Client (Agent Supervision)**
    Simule des machines qui envoient leurs métriques système.
 
-2. **Serveur de monitoring**
+2. **Serveur de supervision**
    Reçoit les données des clients et les traite.
 
 3. **Base de données SQLite**
@@ -35,7 +35,7 @@ distributed-network-monitoring/
 
 client/ → agents clients
 
-server/ → serveur de monitoring
+server/ → serveur de supervision
 
 database/ → gestion base de données
 
@@ -78,13 +78,6 @@ for i in {1..20}; do python client/agent_client.py & done
 "disk": 88,
 "uptime": 9689
 }
-
-## Améliorations possibles
-
-* Dashboard Web avec Flask
-* Visualisation graphique des métriques
-* Monitoring temps réel
-* Déploiement sur plusieurs machines
 
 ## Auteur
 
